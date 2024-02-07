@@ -51,15 +51,72 @@ const ConstituencyView = ({
           width: '25px'
         }}
       ></div>
+
       <div className="flex flex-col w-full px-5 py-4 relative">
-        <div className="flex flex-col w-full mb-8">
-          <div className="font-bold font-mono text-7xl text-emerald-500">
-            {selectedSeat.seat}
+        <div className="flex mb-8">
+          <div className=" flex-col">
+            <div className="font-bold font-mono text-7xl text-emerald-500">
+              {selectedSeat.seat}
+            </div>
+            <div className="font-mono font-bold text-3xl text-emerald-500">
+              {selectedSeat.pti_data.constituency_name}
+            </div>
           </div>
-          <div className="font-mono font-bold text-3xl text-emerald-500">
-            {selectedSeat.pti_data.constituency_name}
+
+          <div className=" flex-col ml-auto">
+            {selectedSeat.pti_data.candidate_symbol.symbolfile && (
+              <div className="flex flex-col">
+                <div className="font-mono font-bold text-3xl mb-4 text-emerald-500">
+                  Symbol
+                </div>
+                <div className="flex flex-col text-gray-600 font-mono mb-2 text-3xl justify-center">
+                  <div className="mb-2">
+                    {selectedSeat.pti_data.candidate_symbol.text}
+                  </div>
+                  <div className="flex text-gray-600 font-mono">
+                    {selectedSeat.pti_data.candidate_symbol.symbolfile ? (
+                      <img
+                        style={{ height: '100px', width: '100px' }}
+                        src={selectedSeat.pti_data.candidate_symbol.url}
+                      ></img>
+                    ) : selectedSeat.form33_data?.candidate_symbol_url ? (
+                      <div>
+                        <img
+                          style={{ height: '100px', width: '100px' }}
+                          src={selectedSeat.form33_data.candidate_symbol_url}
+                        ></img>
+                        <div className="text-xs mt-4">
+                          <a
+                            href={'https://pticandidates.com/'}
+                            target="_blank"
+                            className="text-blue-500 hover:underline"
+                          >
+                            pticandidates.com
+                          </a>{' '}
+                          does not list a symbol for this constituency, this
+                          symbol is from the sample ballot paper and is
+                          accurate.
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-xs">
+                        <a
+                          href={'https://pticandidates.com/'}
+                          target="_blank"
+                          className="text-blue-500 hover:underline"
+                        >
+                          pticandidates.com
+                        </a>{' '}
+                        does not list a symbol for this constituency.
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
+
         <div className="flex flex-col absolute right-3 bottom-3 text-gray-700 font-semibold font-mono hidden md:flex">
           <div>
             {selectedSeat.type === 'national'
@@ -67,6 +124,7 @@ const ConstituencyView = ({
               : selectedSeat.province.toUpperCase()}
           </div>
         </div>
+
         {selectedSeat.pti_data.candidate_name && (
           <SeatCandidateView seat={selectedSeat} />
         )}

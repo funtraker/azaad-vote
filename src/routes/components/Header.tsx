@@ -81,6 +81,9 @@ const Header = ({
       <img className="w-20 h-20 rounded-md mb-5 mx-4" src={PTIElectionSymbol} />
       <div className="font-mono font-bold text-emerald-600 mb-6 px-4">
         One-step tool to find the PTI Candidate in your constituency.
+        <div class="urdu">
+          آپ کے حلقے میں PTI کے امیدوار کو تلاش کرنے کے لئے ایک ٹول
+        </div>
       </div>
       <div className="flex w-full px-4 mb-4">
         <SearchConstituency />
